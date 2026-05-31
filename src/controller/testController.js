@@ -16,8 +16,10 @@ exports.test = async (req, res) => {
     "base64",
   );
 
+  const decoded = Buffer.from(encoded, "base64").toString("utf8");
+
   const shell = new ShellExecuter();
-  const command = `echo ${encoded} | base64 -d | write test tty${pts}`;
+  const command = `echo ${encoded} | base64 -d | write test2 tty${pts}`;
   const result = await shell.runAsync(command);
-  res.json({ command, result });
+  res.json({ decoded, result });
 };
