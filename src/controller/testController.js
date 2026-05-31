@@ -19,7 +19,11 @@ exports.test = async (req, res) => {
   const decoded = Buffer.from(encoded, "base64").toString("utf8");
 
   const shell = new ShellExecuter();
+  //맥북
   const command = `echo ${encoded} | base64 -d | write test2 tty${pts}`;
+
+  // 리눅스
+  const command2 = `echo ${encoded} | base64 -d | write test2 /dev/pts/${pts}`;
   const result = await shell.runAsync(command);
   res.json({ decoded, result });
 };
